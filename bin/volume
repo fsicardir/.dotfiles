@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+get_volume() {
+    pactl list sinks | grep -E "^[[:space:]]*Volume: " | cut -d/ -f2 | tr -d "\ %" | tail -n 1
+}
+
+notify_volume() {
+    vol=$(get_volume)
+    mute=$(pactl list sinks | sed -n -E "s/[[:space:]]*Mute: (.*)/\1/p" | tail -n 1)
+    icon=""
+    if [[ ("$vol" == "0") || ("$mute" == "yes") ]]; then
+        icon="婢"
+    else
+        icon="墳"
+    fi
+    bar="$(~/bin/progress_bar ${vol} 24)"
+    body=$(printf "%s %3s%% %s" $icon "$vol" "$bar")
+    notify-send "Volume" "$body" -h string:x-canonical-private-synchronous:volume
+}
+
+usage() {
+    echo -e "Usage:\n\t$0\n\t$0 <toggle/on/off>\n\t$0 <inc/dec> <step>"
+}
+
+if [[ $# == "1" ]]; then
+    if [[ $1 == "toggle" ]]; then
+        pactl -- set-sink-mute @DEFAULT_SINK@ toggle
+    elif [[ $1 == "on" ]]; then
+        pactl -- set-sink-mute @DEFAULT_SINK@ 0
+    elif [[ $1 == "off" ]]; then
+        pactl -- set-sink-mute @DEFAULT_SINK@ 1
+    else
+        usage
+        exit 1
+    fi
+elif [[ $# == "2" ]]; then
+    step=$2
+    if [[ $1 == "inc" ]]; then
+        new_vol=$((step + $(get_volume)))
+        if [[ new_vol -ge 100 ]]; then
+            pactl -- set-sink-volume @DEFAULT_SINK@ "100%"
+        else
+            pactl -- set-sink-volume @DEFAULT_SINK@ "+${step}%"
+        fi
+    elif [[ $1 == "dec" ]]; then
+        pactl -- set-sink-volume @DEFAULT_SINK@ "-${step}%"
+    else
+        usage
+        exit 1
+    fi
+elif [[ $# -gt 2 ]]; then
+    usage
+    exit 1
+fi
+notify_volume
+exit 0
+

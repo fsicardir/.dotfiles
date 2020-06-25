@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+export EDITOR='vim';
+
+export PYTHONIOENCODING='UTF-8';
+
+export HISTSIZE='32768';
+export HISTFILESIZE="${HISTSIZE}";
+# Omit duplicates and commands that begin with a space from history.
+export HISTCONTROL='ignoreboth';
+
+export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
+
+export LESS="-FRX"
+
+export PASSWORD_STORE_GENERATED_LENGTH=24
+
+path_append() {
+    for path in $@; do
+        [[ ":$PATH:" == *:$path:* ]] || export PATH="$PATH:$path"
+    done
+    unset path
+}
+
+path_prepend() {
+    for (( i=$#; i>0; i-- )); do
+        [[ ":$PATH:" == *:${!i}:* ]] || export PATH="${!i}:$PATH"
+    done
+    unset path
+}
+
+path_prepend "$HOME/bin" "$HOME/.local/bin"
+
+export JAVA_HOME="/usr/lib/jvm/jdk-11.0.2"
+export M2_HOME="/opt/apache-maven-3.5.2"
+path_append "$JAVA_HOME/bin" "$M2_HOME/bin"
+export MAVEN_OPTS="-Xms256m -Xmx512m"
+
+path_append "$HOME/.cargo/bin"
+
+path_append "$HOME/.pyenv/bin"
+export PIPENV_VENV_IN_PROJECT=1

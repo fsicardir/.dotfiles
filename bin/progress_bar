@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import sys
+
+def get_symbol(i, num_filled):
+    n = num_filled - i
+    if n <= 0: return ' '
+    if n >= 1: return '\u2588'
+    symbols = ['\u258f', '\u258e', '\u258d', '\u258c', '\u258b', '\u258a', '\u2589']
+    return symbols[int(n * 7)]
+
+def bar(percentage: float, total=10) -> str:
+    num_filled = percentage * total / 100
+    bar = ''
+    for i in range(total):
+        bar += get_symbol(i, num_filled)
+    return bar + '\n'
+
+def print_usage(name):
+    print(f'Usage:\n\t{name} <percentage> [<total>]')
+
+def main():
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print_usage(sys.argv[0])
+        return 1
+    percentage = float(sys.argv[1].rstrip('%'))
+    if len(sys.argv) == 2:
+        print(bar(float(percentage)))
+    else:
+        total_bars = sys.argv[2]
+        print(bar(float(percentage), int(total_bars)))
+
+    return 0
+
+if __name__ == '__main__':
+    exit(main())

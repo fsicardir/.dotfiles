@@ -1,0 +1,19 @@
+set bell-style none
+set colored-stats on
+set completion-ignore-case on
+set completion-map-case on
+set completion-query-items 50
+set editing-mode vi
+set enable-bracketed-paste on
+set show-all-if-unmodified on
+set skip-completed-text on
+set visible-stats on
+
+set input-meta on
+set output-meta on
+set convert-meta off
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+Control-l: clear-screen

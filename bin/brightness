@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+notify_brightness() {
+    percentage=$(xbacklight -get | cut -d. -f1)
+    bar=$(~/bin/progress_bar $percentage 24)
+    body=$(printf " %3s%% %s" "$percentage" "$bar")
+    notify-send "Brightness" "$body" -h string:x-canonical-private-synchronous:volume
+}
+
+if [[ $# != 2 || ($1 != "dec" && $1 != "inc")]]; then
+    echo -e "Usage:\n\t$0 <dec/inc> <step>"
+    exit 1
+fi
+
+xbacklight "-$1" "$2"
+notify_brightness

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+if [[ "$#" != 1 ]]; then
+    echo -e "Usage:\n\t$0 [all/selection/focused]"
+    exit 1
+fi
+
+DIR="~/Pictures/screenshots"
+
+case "$1" in
+    a|all)
+        scrot -m -e "mv \$f $DIR"
+        ;;
+    s|sel|selection)
+        sleep 0.2; scrot -s -e  "mv \$f $DIR"
+        ;;
+    f|focused)
+        scrot -ub -e "mv \$f $DIR"
+        ;;
+esac
+
+if [ $? == 0 ]; then
+    message=" New screenshot saved in
+    $DIR"
+    notify-send "Screenshot" "$message"
+fi
