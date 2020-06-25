@@ -1,0 +1,23 @@
+@import "config"
+
+configuration {
+        modi: "powermenu:~/bin/power_menu";
+        lines: 5;
+}
+
+@theme "gruvbox-dark"
+
+window {
+    width: 10%;
+}
+
+listview {
+    scrollbar: false;
+    border: 0;
+    padding: 0;
+}
+
+inputbar {
+    enabled: false;
+}
+

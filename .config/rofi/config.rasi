@@ -1,0 +1,9 @@
+configuration {
+        modi: "combi,drun,ssh";
+        font: "Hack Nerd Font 12";
+        show-icons: true;
+        combi-modi: "drun,window,ssh";
+        scroll-method: 1;
+        sidebar-mode: true;
+        theme: "gruvbox-dark";
+}

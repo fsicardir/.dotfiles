@@ -1,0 +1,194 @@
+    
+# General
+# -------
+
+# terminal emulator
+super + Return
+	alacritty
+
+super + shift + Return
+    alacritty --working-directory $(xdotool getactivewindow getwindowname | cut -d: -f2 | sed -E "s:~:$HOME:")
+
+# program launcher
+super + space
+    rofi -show combi -display-combi '❯ '
+
+# power menu
+super + Escape
+    rofi -show powermenu -theme powermenu -m -1
+
+# lock screen
+ctrl + alt + l
+     dm-tool lock
+
+# toggle keyboard layout
+super + alt + space
+    setxkbmap -option caps:escape; setxkbmap {latam, us}
+
+# volume control
+XF86AudioLowerVolume
+    ~/bin/volume dec 5
+XF86AudioRaiseVolume
+    ~/bin/volume inc 5
+XF86AudioMute
+    ~/bin/volume toggle
+shift + XF86AudioLowerVolume
+    ~/bin/volume dec 1
+shift + XF86AudioRaiseVolume
+    ~/bin/volume inc 1
+
+# brightness control
+XF86MonBrightnessDown
+	~/bin/brightness dec 5
+XF86MonBrightnessUp
+	~/bin/brightness inc 5
+shift + XF86MonBrightnessDown
+	~/bin/brightness dec 1
+shift + XF86MonBrightnessUp
+	~/bin/brightness inc 1
+
+# screenshots
+Print
+    ~/bin/screenshot all
+shift + Print
+    ~/bin/screenshot focused
+shift + alt + Print
+    ~/bin/screenshot selection
+
+# Environment
+# -----------
+
+# reload sxhkd and panel
+super + e ; {s,p,b}
+	{ \
+    pkill -USR1 -x sxhkd && notify-send "Environment" "sxhkd reloaded", \
+    ~/bin/panel/panel &>/dev/null && notify-send "Environment" "panel reloaded", \
+    bspc wm -r && notify-send "Environment" "bspwm reloaded"
+    }
+
+# CLI common programs
+# ------------
+
+super + x; {r,p}
+    { \
+    alacritty -e ranger, \
+    alacritty -e python3 \
+    }
+
+# GUI common programs
+# -------------------
+
+super + g; {f,i}
+    { \
+    firefox, \
+    idea \
+    }
+
+# BSPWM
+# -----
+
+# close and kill focused node
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# focus/swap the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus or send to the given desktop
+super + {_,shift +}{1-9,0}
+	bspc {desktop -f,node -d} '{1-9,0}'
+
+# cycle between desktops in the current monitor/windows in the current desktop
+{super,alt} + {_,shift +} Tab
+	bspc {desktop,node} -f {next,prev}.local
+
+# cycle between monitors
+ctrl + {_,shift +} Tab
+    bspc monitor -f {next,prev}
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+super + ctrl + {h,j,k,l}
+	~/bin/bspwm_node_resize {west,south,north,east} 50
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node in current desktop
+super + shift + b
+	bspc node -s biggest.local
+
+# preselect the direction
+super + alt + {h,j,k,l}
+    bspc node --presel-dir '~{west,south,north,east}'
+
+# preselect the ratio
+super + alt + {1-9}
+	bspc node -o 0.{1-9}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t ~{tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + a ; {m,l,s,p}
+	bspc node -g {marked,locked,sticky,private}
+
+# Set the split ratio on demand.
+super + z ; {2,3,4}
+	bspc config split_ratio { \
+	0.50 && notify-send "BSPWM configuration" "Split ratio set to 0.50", \
+	0.66 && notify-send "BSPWM configuration" "Split ratio set to 0.66", \
+	0.75 && notify-send "BSPWM configuration" "Split ratio set to 0.75" \
+	}
+
+# Make node split ratios equal or balanced.  The former applies to the
+# root of the tree to equalise all split ratios.  The latter applies to
+# the parent node to even out manually-split windows.
+super + z ; {e,b}
+	bspc node {@/ --equalize,@parent --balance}
+
+# Rotate all windows {counter-}clockwise by 90 degrees.
+super + {_,shift + }r
+	bspc node @/ --rotate {90,-90}
+
+# Dynamic gaps.
+super + shift + {minus,plus}
+	bspc config -d focused window_gap "$(($(bspc config -d focused window_gap) {-,+} 2 ))"
+
+super + shift + period
+    bspc config -d focused window_gap 12
+
+
+# Continuous input mode
+# ---------------------
+
+# Resize node in the given direction.
+super + ctrl + c : {h,j,k,l}
+    ~/bin/bspwm_node_resize {west,south,north,east} 10
+
+# Mode for dynamic gaps.
+super + ctrl + c : {minus,plus}
+	bspc config -d focused window_gap "$(($(bspc config -d focused window_gap) {-,+} 1 ))"
+
+# Move floating windows with the arrow keys
+super + ctrl + c : {Left,Down,Up,Right}
+	bspc node -v {-5 0,0 5,0 -5,5 0}

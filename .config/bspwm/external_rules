@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+wid=$1
+class=$2
+instance=$3
+consequences=$4
+
+if [ "$class" = Firefox ] ; then
+	title=$(xtitle "$wid")
+	case "$title" in
+		Picture-in-Picture)
+			echo "state=floating sticky=on border=off"
+			;;
+	esac
+fi
