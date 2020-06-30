@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+. /home/fransic/bin/lib/monitors.sh
+
+count_monitors() {
+    xrandr | grep " connected" | wc -l
+}
+
+monitor_count=$(count_monitors)
+while true; do
+    new_count=$(count_monitors)
+    if [ "$new_count" != "$monitor_count" ]; then
+        monitor_count="$new_count"
+        monitor_configuration
+        /home/fransic/bin/panel/panel &
+    fi
+    sleep 3
+done

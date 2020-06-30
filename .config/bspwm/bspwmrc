@@ -38,4 +38,6 @@ feh --bg-fill ~/Pictures/leaf-bg.jpg &
 
 sxhkd &
 
+~/bin/auto_configure_monitors &
+
 ~/bin/panel/panel &
