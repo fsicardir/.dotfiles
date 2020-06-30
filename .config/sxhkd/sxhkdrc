@@ -11,7 +11,7 @@ super + shift + Return
 
 # program launcher
 super + space
-    rofi -show combi -display-combi '❯ '
+    rofi -show combi -display-combi '❯ ' -m -1
 
 # power menu
 super + Escape
