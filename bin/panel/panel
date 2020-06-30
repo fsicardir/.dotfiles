@@ -35,14 +35,9 @@ BAR_HEIGHT="25"
 MONITOR_Y_OFFSET=$(monitor_dim "$MONITOR" "offset_y")
 BAR_Y_OFFSET=$((MONITOR_Y_OFFSET + 5))
 
+~/bin/panel/panel_bar < "$PANEL_FIFO" | lemonbar -d -a 32 -u 2 -n "$PANEL_WM_NAME" -g "${BAR_WIDTH}x${BAR_HEIGHT}+${BAR_X_OFFSET}+${BAR_Y_OFFSET}" -f "Font Awesome" -f "Hack Nerd Font-11" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | bash &
+
 bspc config -m "$MONITOR" top_padding 30
-
-SEC_MONITOR="$(secondary_monitor)"
-if [[ ! -z "$SEC_MONITOR" ]]; then
-    bspc config -m "$SEC_MONITOR" top_padding 0
-fi
-
-~/bin/panel/panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -u 2 -n "$PANEL_WM_NAME" -g "${BAR_WIDTH}x${BAR_HEIGHT}+${BAR_X_OFFSET}+${BAR_Y_OFFSET}" -f "Font Awesome" -f "Hack Nerd Font-11" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | bash &
 
 trap 'trap - TERM; bspc config top_padding 0; kill $(ps -o pid= --ppid $$) &>/dev/null' INT TERM QUIT EXIT
 
