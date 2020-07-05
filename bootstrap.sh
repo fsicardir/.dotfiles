@@ -9,6 +9,7 @@ bootstrap() {
         --exclude ".gitmodules" \
         --exclude ".gitignore" \
         --exclude "README.md" \
+        --exclude "bootstrap.sh" \
         -avh "./" ~
     source ~/.bash_profile
 }
