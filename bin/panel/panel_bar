@@ -124,11 +124,12 @@ while read -r line ; do
 						esac
 						wm="${wm}%{F${FG}}%{B${BG}}%{U${UL}}%{+u}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}%{-u}"
 						;;
-                    G*)
+                    [LGT]*)
                         # node flags
                         [ -z "$name" ] && name="*"
-                        wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} [${name}] %{B-}%{F-}"
+                        wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG}[${name}]%{B-}%{F-}"
                         ;;
+
 				esac
 				shift
 			done

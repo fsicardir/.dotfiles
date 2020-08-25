@@ -28,19 +28,20 @@ bspc subscribe report > "$PANEL_FIFO" &
 
 MONITOR="$(primary_monitor)"
 MONITOR_WIDTH=$(monitor_dim "$MONITOR" "width")
-BAR_WIDTH=$((MONITOR_WIDTH - 10))
+BAR_WIDTH="$MONITOR_WIDTH"
 MONITOR_X_OFFSET=$(monitor_dim "$MONITOR" "offset_x")
-BAR_X_OFFSET=$((MONITOR_X_OFFSET + 5))
-BAR_HEIGHT="25"
+BAR_X_OFFSET="$MONITOR_X_OFFSET"
+BAR_HEIGHT="30"
 MONITOR_Y_OFFSET=$(monitor_dim "$MONITOR" "offset_y")
-BAR_Y_OFFSET=$((MONITOR_Y_OFFSET + 5))
+BAR_Y_OFFSET="$MONITOR_Y_OFFSET"
 
-~/bin/panel/panel_bar < "$PANEL_FIFO" | lemonbar -d -a 32 -u 2 -n "$PANEL_WM_NAME" -g "${BAR_WIDTH}x${BAR_HEIGHT}+${BAR_X_OFFSET}+${BAR_Y_OFFSET}" -f "Font Awesome" -f "Hack Nerd Font-11" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | bash &
+~/bin/panel/panel_bar < "$PANEL_FIFO" | lemonbar -d -a 32 -u 2 -n "$PANEL_WM_NAME" -g "${BAR_WIDTH}x${BAR_HEIGHT}+${BAR_X_OFFSET}+${BAR_Y_OFFSET}" -f "Font Awesome" -f "Hack Nerd Font-12" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | bash &
 
 wid=$(xdo id -m -a "$PANEL_WM_NAME")
 xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
 
-bspc config -m "$MONITOR" top_padding 30
+TOP_PAD=$(bspc config top_padding)
+bspc config -m "$MONITOR" top_padding $((TOP_PAD + BAR_HEIGHT))
 
 trap 'trap - TERM; bspc config top_padding 0; kill $(ps -o pid= --ppid $$) &>/dev/null' INT TERM QUIT EXIT
 
