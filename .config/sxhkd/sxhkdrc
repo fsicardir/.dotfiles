@@ -103,9 +103,13 @@ super + {p,b,comma,period}
 super + {_,shift +}{1-9,0}
 	bspc {desktop -f,node -d} '{1-9,0}'
 
-# cycle between desktops in the current monitor/windows in the current desktop
-{super,alt} + {_,shift +} Tab
-	bspc {desktop,node} -f {next,prev}.local
+# cycle between desktops in the current monitor
+super + {_,shift +} Tab
+	bspc desktop -f {next,prev}.local
+
+# cycle between windows in the current desktop
+super + {_, shift +} n
+    bspc node -f {next,prev}.local
 
 # cycle between monitors
 ctrl + {_,shift +} Tab
