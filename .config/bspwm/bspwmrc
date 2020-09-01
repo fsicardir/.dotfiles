@@ -48,4 +48,4 @@ sxhkd &
 
 ~/bin/panel/panel &
 
-alacritty --class main --command main
+alacritty --class main --command "/home/fransic/bin/main"
