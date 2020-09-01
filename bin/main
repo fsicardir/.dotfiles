@@ -1,27 +1,23 @@
 #!/usr/bin/env bash
 
 SESSION="main"
-SHELL_W=" shell"
-PYTHON_W=" python"
-MONITOR_W=" system"
+SHELL_W=""
+PYTHON_W=""
+MONITOR_W=""
 
 tmux has-session -t ${SESSION} &> /dev/null
 
 if [ $? != 0 ]; then
     tmux new-session -d -s "${SESSION}" -n "${SHELL_W}" -c ~
 
+    tmux split-window -h -t "${SESSION}:${SHELL_W}" -c ~
+
     tmux new-window -n "${PYTHON_W}" -t "${SESSION}" python3
 
-    tmux new-window -n "${MONITOR_W}" -t "${SESSION}" -c /
+    tmux new-window -n "${MONITOR_W}" -t "${SESSION}" htop
 
-    tmux split-window -h -t "${SESSION}:${MONITOR_W}" htop
-
-    tmux split-window -v -t "${SESSION}:${MONITOR_W}" journalctl -f
+    tmux split-window -h -t "${SESSION}:${MONITOR_W}" journalctl -f
     
-    tmux resize-pane -L -t "${SESSION}:${MONITOR_W}.1" 30 
-
-    tmux select-pane -t "${SESSION}:${MONITOR_W}.1"
-
     tmux select-window -t "${SESSION}:${SHELL_W}"
 
     tmux select-pane -t "${SESSION}:${SHELL_W}.1"
