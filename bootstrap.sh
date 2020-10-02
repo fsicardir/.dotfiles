@@ -11,6 +11,11 @@ bootstrap() {
         --exclude "README.md" \
         --exclude "bootstrap.sh" \
         -avh "./" ~
+    python3 ~/.vim/pack/plugins/start/YouCompleteMe/install.py \
+        --clangd-completer \
+        --ts-completer \
+        --rust-completer \
+        --java-completer
     source ~/.bash_profile
 }
 
