@@ -23,7 +23,7 @@ ctrl + alt + l
 
 # toggle keyboard layout
 super + alt + space
-    setxkbmap -option caps:escape; setxkbmap {latam, us}
+    setxkbmap {us, latam}
 
 # volume control
 XF86AudioLowerVolume
