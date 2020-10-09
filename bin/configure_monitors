@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-. /home/fransic/bin/lib/monitors.sh
-
-monitor_configuration
-
-/home/fransic/bin/panel/panel &
