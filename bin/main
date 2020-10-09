@@ -17,6 +17,8 @@ if [ $? != 0 ]; then
     tmux new-window -n "${MONITOR_W}" -t "${SESSION}" htop
 
     tmux split-window -h -t "${SESSION}:${MONITOR_W}" journalctl -f
+
+    tmux select-pane -t "${SESSION}:${MONITOR_W}.1"
     
     tmux select-window -t "${SESSION}:${SHELL_W}"
 
