@@ -12,3 +12,7 @@ print_colors() {
     tput sgr0
     echo
 }
+
+z() {
+    zathura "$1" &>/dev/null &
+}
