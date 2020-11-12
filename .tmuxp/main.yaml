@@ -1,0 +1,25 @@
+session_name: main
+windows:
+- window_name: "\uE614"
+  focus: 'true'
+  layout: even-horizontal
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+  - pane
+  start_directory: '~'
+- window_name: "\uE606"
+  options:
+    automatic-rename: 'off'
+  panes:
+  - shell_command: python3
+- window_name: "\uE615"
+  layout: even-horizontal
+  options:
+    automatic-rename: 'off'
+  panes:
+  - shell_command: htop
+    focus: 'true'
+  - journalctl -f
+  start_directory: '~'
