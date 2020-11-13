@@ -14,12 +14,3 @@ windows:
     automatic-rename: 'off'
   panes:
   - shell_command: python3
-- window_name: "\uE615"
-  layout: even-horizontal
-  options:
-    automatic-rename: 'off'
-  panes:
-  - shell_command: htop
-    focus: 'true'
-  - journalctl -f
-  start_directory: '~'

@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+tmuxp load -d sys
 tmuxp load -y main
