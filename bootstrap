@@ -27,6 +27,7 @@ bootstrap() {
     rsync --exclude ".git" \
         --exclude ".gitmodules" \
         --exclude ".gitignore" \
+        --exclude ".gitconfig.user.template" \
         --exclude "README.md" \
         --exclude "bootstrap" \
         -ah "./" ~
