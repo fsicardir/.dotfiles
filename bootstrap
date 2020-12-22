@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+usage() {
+    printf "Usage:\n"
+    printf "\t%s [options]\n" $0
+    printf "Options:\n"
+    printf "\t-h\tdisplays this message\n"
+    printf "\t-r\tfetch from remote repo\n"
+    printf "\t-b\tfull build (YouCompleteMe)\n"
+
+}
+
+fetch_remote() {
+    git pull origin master
+    git submodule update --init --recursive
+}
+
+build() {
+    python3 ~/.vim/pack/plugins/start/YouCompleteMe/install.py \
+        --clangd-completer \
+        --ts-completer \
+        --rust-completer \
+        --java-completer
+}
+
+bootstrap() {
+    rsync --exclude ".git" \
+        --exclude ".gitmodules" \
+        --exclude ".gitignore" \
+        --exclude "README.md" \
+        --exclude "bootstrap" \
+        -ah "./" ~
+    source ~/.bash_profile
+}
+
+OPTERR=0
+REMOTE=false
+BUILD=false
+
+while getopts "rbh" o; do
+    case "$o" in
+        r)
+            REMOTE=true
+            ;;
+        b)
+            BUILD=true
+            ;;
+        h|*)
+            usage
+            [ h == "$o" ]
+            exit $?
+            ;;
+    esac
+done
+
+$REMOTE && fetch_remote
+$BUILD && build
+
+pushd "$(dirname "$BASH_SOURCE")" >/dev/null
+bootstrap
+popd >/dev/null
+
+exit 0
