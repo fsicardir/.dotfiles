@@ -1,6 +1,6 @@
 [submodule ".vim"]
 	path = .vim
-	url = https://github.com/fsicardir/.vim.git
+	url = ../../fsicardir/.vim.git
 [submodule ".config/ranger/plugins/devicons"]
 	path = .config/ranger/plugins/devicons
-	url = https://github.com/alexanderjeurissen/ranger_devicons.git
+	url = ../../alexanderjeurissen/ranger_devicons.git
