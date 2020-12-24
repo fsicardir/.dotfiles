@@ -31,7 +31,6 @@ bootstrap() {
         --exclude "README.md" \
         --exclude "bootstrap" \
         -ah "./" ~
-    source ~/.bash_profile
 }
 
 OPTERR=0
