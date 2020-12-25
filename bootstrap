@@ -7,7 +7,7 @@ usage() {
     printf "\t-h\tdisplays this message\n"
     printf "\t-r\tfetch from remote repo\n"
     printf "\t-b\tfull build (YouCompleteMe)\n"
-
+    printf "\t-d\tchange destination (default is \$HOME)\n"
 }
 
 fetch_remote() {
@@ -24,26 +24,33 @@ build() {
 }
 
 bootstrap() {
+    SRC=$1
+    DEST=$2
     rsync --exclude ".git" \
         --exclude ".gitmodules" \
         --exclude ".gitignore" \
         --exclude ".gitconfig.user.template" \
         --exclude "README.md" \
         --exclude "bootstrap" \
-        -ah "./" ~
+        -ah "$SRC/" "$DEST"
 }
 
 OPTERR=0
 REMOTE=false
 BUILD=false
+SRC="$(dirname "$BASH_SOURCE")"
+DEST="$HOME"
 
-while getopts "rbh" o; do
+while getopts "rbd:h" o; do
     case "$o" in
         r)
             REMOTE=true
             ;;
         b)
             BUILD=true
+            ;;
+        d)
+            DEST=$OPTARG
             ;;
         h|*)
             usage
@@ -56,8 +63,8 @@ done
 $REMOTE && fetch_remote
 $BUILD && build
 
-pushd "$(dirname "$BASH_SOURCE")" >/dev/null
-bootstrap
-popd >/dev/null
+echo $SRC
+echo $DEST
+bootstrap $SRC $DEST
 
 exit 0
