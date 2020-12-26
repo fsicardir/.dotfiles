@@ -63,8 +63,6 @@ done
 $REMOTE && fetch_remote
 $BUILD && build
 
-echo $SRC
-echo $DEST
 bootstrap $SRC $DEST
 
 exit 0
