@@ -7,7 +7,7 @@ super + Return
 	alacritty
 
 super + shift + Return
-    alacritty --working-directory $(xdotool getactivewindow getwindowname | cut -d: -f2 | sed -E "s:~:$HOME:")
+    alacritty -e tmux
 
 # program launcher
 super + space
