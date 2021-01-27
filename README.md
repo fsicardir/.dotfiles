@@ -3,6 +3,20 @@
 
 Configuration files for my daily driver.
 
+Usage
+-----
+
+```
+$ ./bootstrap --help
+Usage:
+        ./bootstrap [options]
+Options:
+        -h      displays this message
+        -r      fetch from remote repo
+        -b      full build (YouCompleteMe)
+        -d      change destination (default is $HOME)
+```
+
 Keyboard configuration
 ----------------------
 
