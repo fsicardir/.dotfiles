@@ -1,10 +1,12 @@
 .dotfiles
 =========
 
-Configuration files for my daily driver.
+Configuration files for my GNU/Linux boxes.
 
-Usage
------
+Bootstrap
+---------
+
+Easily deploy on any machine.
 
 ```
 $ ./bootstrap -h
@@ -17,12 +19,32 @@ Options:
         -d      change destination (default is $HOME)
 ```
 
-Keyboard configuration
+Useful tweaks
 ----------------------
 
-Set these variables in /etc/default/keyboard:
+### Keyboard configuration
+
+Set these variables in `/etc/default/keyboard`:
 
 ```
 XKBLAYOUT="latam"
 XKBOPTIONS="caps:escape"
+```
+
+### Lock on suspend
+
+Create this file: `/etc/systemd/system/lock.service` and then run `systemctl enable lock`
+
+```
+[Unit]
+Description=Lock the screen on resume from suspend
+Before=suspend.target
+
+[Service]
+User=fransic
+Environment=XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+ExecStart=/usr/bin/dm-tool lock
+
+[Install]
+WantedBy=suspend.target
 ```
