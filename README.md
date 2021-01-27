@@ -7,7 +7,7 @@ Usage
 -----
 
 ```
-$ ./bootstrap --help
+$ ./bootstrap -h
 Usage:
         ./bootstrap [options]
 Options:
