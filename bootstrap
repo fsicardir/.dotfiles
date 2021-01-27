@@ -24,6 +24,8 @@ build() {
         --java-completer
 }
 
+RSYNC="rsync -a --copy-links"
+
 OPTERR=0
 REMOTE=false
 BUILD=false
@@ -56,8 +58,8 @@ done
 $REMOTE && fetch_remote
 $BUILD && build
 
-rsync "$SRC/common" "$DEST"
+$RSYNC "$SRC/common/" "$DEST"
 
-$LIGHT || rsync "$SRC/main" "$DEST"
+$LIGHT || $RSYNC "$SRC/main/" "$DEST"
 
 exit 0
