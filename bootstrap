@@ -8,6 +8,7 @@ usage() {
     printf "\t-r\tfetch from remote repo\n"
     printf "\t-b\tfull build (YouCompleteMe)\n"
     printf "\t-d\tchange destination (default is \$HOME)\n"
+    printf "\t-l\tlight configuration (no X environments)\n"
 }
 
 fetch_remote() {
@@ -23,25 +24,14 @@ build() {
         --java-completer
 }
 
-bootstrap() {
-    SRC=$1
-    DEST=$2
-    rsync --exclude ".git" \
-        --exclude ".gitmodules" \
-        --exclude ".gitignore" \
-        --exclude ".gitconfig.user.template" \
-        --exclude "README.md" \
-        --exclude "bootstrap" \
-        -ah "$SRC/" "$DEST"
-}
-
 OPTERR=0
 REMOTE=false
 BUILD=false
 SRC="$(dirname "$BASH_SOURCE")"
 DEST="$HOME"
+LIGHT=false
 
-while getopts "rbd:h" o; do
+while getopts "rbd:lh" o; do
     case "$o" in
         r)
             REMOTE=true
@@ -51,6 +41,9 @@ while getopts "rbd:h" o; do
             ;;
         d)
             DEST=$OPTARG
+            ;;
+        l)
+            LIGHT=true
             ;;
         h|*)
             usage
@@ -63,6 +56,8 @@ done
 $REMOTE && fetch_remote
 $BUILD && build
 
-bootstrap $SRC $DEST
+rsync "$SRC/common" "$DEST"
+
+$LIGHT || rsync "$SRC/main" "$DEST"
 
 exit 0

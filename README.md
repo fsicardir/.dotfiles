@@ -17,6 +17,7 @@ Options:
         -r      fetch from remote repo
         -b      full build (YouCompleteMe)
         -d      change destination (default is $HOME)
+        -l      light configuration (no X environments)
 ```
 
 Useful tweaks
