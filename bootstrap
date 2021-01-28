@@ -56,7 +56,7 @@ while getopts "rbd:lh" o; do
 done
 
 $REMOTE && fetch_remote
-$BUILD && build
+$BUILD && ! $LIGHT && build
 
 $RSYNC "$SRC/common/" "$DEST"
 
