@@ -8,7 +8,7 @@ usage() {
     printf "\t-r\tfetch from remote repo\n"
     printf "\t-b\tfull build (YouCompleteMe)\n"
     printf "\t-d\tchange destination (default is \$HOME)\n"
-    printf "\t-l\tlight configuration (for command-line-only environments)\n"
+    printf "\t-l\tlightweight configuration (for command-line-only environments)\n"
 }
 
 fetch_remote() {
@@ -31,7 +31,7 @@ REMOTE=false
 BUILD=false
 SRC="$(dirname "$BASH_SOURCE")"
 DEST="$HOME"
-LIGHT=false
+LIGHTWEIGHT=false
 
 while getopts "rbd:lh" o; do
     case "$o" in
@@ -45,7 +45,7 @@ while getopts "rbd:lh" o; do
             DEST=$OPTARG
             ;;
         l)
-            LIGHT=true
+            LIGHTWEIGHT=true
             ;;
         h|*)
             usage
@@ -56,10 +56,10 @@ while getopts "rbd:lh" o; do
 done
 
 $REMOTE && fetch_remote
-$BUILD && ! $LIGHT && build
+$BUILD && ! $LIGHTWEIGHT && build
 
 $RSYNC "$SRC/common/" "$DEST"
 
-$LIGHT || $RSYNC "$SRC/main/" "$DEST"
+$LIGHTWEIGHT || $RSYNC "$SRC/main/" "$DEST"
 
 exit 0

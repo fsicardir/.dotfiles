@@ -17,7 +17,7 @@ Options:
         -r      fetch from remote repo
         -b      full build (YouCompleteMe)
         -d      change destination (default is $HOME)
-        -l      light configuration (for command-line-only environments)
+        -l      lightweight configuration (for command-line-only environments)
 ```
 
 For example:
