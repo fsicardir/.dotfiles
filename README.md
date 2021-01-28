@@ -17,7 +17,15 @@ Options:
         -r      fetch from remote repo
         -b      full build (YouCompleteMe)
         -d      change destination (default is $HOME)
-        -l      light configuration (no X environments)
+        -l      light configuration (for command-line-only environments)
+```
+
+For example:
+
+```
+git clone --recursive https://github.com/fsicardir/.dotfiles.git
+cd .dotfiles
+./bootstrap
 ```
 
 Useful tweaks

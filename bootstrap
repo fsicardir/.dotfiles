@@ -8,7 +8,7 @@ usage() {
     printf "\t-r\tfetch from remote repo\n"
     printf "\t-b\tfull build (YouCompleteMe)\n"
     printf "\t-d\tchange destination (default is \$HOME)\n"
-    printf "\t-l\tlight configuration (no X environments)\n"
+    printf "\t-l\tlight configuration (for command-line-only environments)\n"
 }
 
 fetch_remote() {
