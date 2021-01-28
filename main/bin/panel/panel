@@ -18,7 +18,7 @@ PANEL_FIFO="/tmp/panel-fifo"
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
-xtitle -sf 'T%s\n' > "$PANEL_FIFO" &
+xtitle -t 70 -sf 'T%s\n' > "$PANEL_FIFO" &
 clock -sf 'C%a %d/%m %H:%M:%S' -i 1 > "$PANEL_FIFO" &
 cmd_repeat "network" 3 > "$PANEL_FIFO" &
 cmd_repeat "bluetooth" 3 > "$PANEL_FIFO" &
