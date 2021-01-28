@@ -1,0 +1,10 @@
+
+if [ -f /etc/profile.d/bash_completion.sh ]; then
+    . /etc/profile.d/bash_completion.sh
+elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+if __load_completion git &>/dev/null; then
+    complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
+fi
