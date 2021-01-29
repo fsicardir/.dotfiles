@@ -58,6 +58,7 @@
     per_monitor_dpi = false
 
 [shortcuts]
+    # mod1 is alt
     close = ctrl+space
     close_all = ctrl+mod1+space
     history = ctrl+mod1+comma
