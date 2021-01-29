@@ -2,7 +2,7 @@
 
 configuration {
         modi: "powermenu:~/bin/power_menu";
-        lines: 5;
+        lines: 6;
 }
 
 @theme "gruvbox-dark"
