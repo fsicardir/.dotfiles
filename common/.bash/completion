@@ -8,3 +8,7 @@ fi
 if __load_completion git &>/dev/null; then
     complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
 fi
+
+if __load_completion docker &>/dev/null; then
+    complete -o bashdefault -o default -o nospace -F _docker d
+fi
