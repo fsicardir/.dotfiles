@@ -23,15 +23,17 @@ ctrl + alt + l
 
 # toggle keyboard layout
 super + alt + space
-    setxkbmap {latam, us} && notify-send "Keyboard layout changed"
+    KB_LAYOUT={latam,us}; \
+    setxkbmap $KB_LAYOUT; \
+    notify-send "Devices" "Keyboard layout changed to $KB_LAYOUT"
 
 # toggle wifi
 super + d ; w
-    wifi {off, on} | cut -d= -f2 | xargs -d'\n' printf "WiFi%s" | xargs -d'\n' notify-send
+    wifi toggle | cut -d= -f2 | xargs -d'\n' printf "Devices\nWiFi%s" | xargs -d'\n' notify-send
 
 # toggle bluetooth
 super + d ; b
-    bluetooth {off, on} | cut -d= -f2 | xargs -d'\n' printf "Bluetooth%s" | xargs -d'\n' notify-send
+    bluetooth toggle | cut -d= -f2 | xargs -d'\n' printf "Devices\nBluetooth%s" | xargs -d'\n' notify-send
 
 # volume control
 XF86AudioLowerVolume
@@ -107,9 +109,18 @@ super + {_,shift + }{h,j,k,l}
 super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
-# focus or send to the given desktop
-super + {_,shift +}{1-9,0}
-	bspc {desktop -f,node -d} '{1-9,0}'
+# send to the given desktop mantaining focus
+super + shift + {1-9,0}
+	bspc node -d '{1-9,0}' -f
+
+# send to the given desktop
+super + ctrl + {1-9,0}
+	bspc node -d '{1-9,0}'
+
+# focus the given desktop or the previously focused if it already is
+super + {1-9,0}
+    DESKTOP='{1-9,0}'; \
+    bspc query -D -d "$DESKTOP.focused" && bspc desktop -f last || bspc desktop -f "$DESKTOP"
 
 # cycle between desktops in the current monitor
 super + {_,shift +} Tab
