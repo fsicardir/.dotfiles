@@ -1,15 +1,18 @@
 FROM debian:stable-slim
 
-RUN apt-get update
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get -y --no-install-recommends install \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get -y --no-install-recommends install \
     bash-completion \
     ca-certificates \
     curl \
     less \
     locales \
-    tmux
+    procps \
+    python3 \
+    tmux \
+    vim
 
-RUN locale-gen en_US.UTF-8
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
 COPY ./common /root
