@@ -28,7 +28,17 @@ cd .dotfiles
 ./bootstrap
 ```
 
-Useful tweaks
+Docker Image
+------------
+
+Spawn a comfortably configured debian container.
+
+Build image: `docker build -t debian_custom:latest .`.
+Run container: `docker run -it --rm debian_custom:latest`.
+
+Or directly from docker hub: `docker run -it --rm fsicardir/debian_custom:latest`.
+
+Other Useful tweaks
 ----------------------
 
 ### Keyboard configuration
