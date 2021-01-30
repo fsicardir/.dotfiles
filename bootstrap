@@ -17,11 +17,12 @@ fetch_remote() {
 }
 
 build() {
-    python3 ~/.vim/pack/plugins/start/YouCompleteMe/install.py \
+    DEST="$1"
+    python3 $DEST/.vim/pack/plugins/start/YouCompleteMe/install.py \
         --clangd-completer \
-        --ts-completer \
         --rust-completer \
-        --java-completer
+        --java-completer \
+        --ts-completer
 }
 
 RSYNC="rsync -a --copy-links"
@@ -56,10 +57,12 @@ while getopts "rbd:lh" o; do
 done
 
 $REMOTE && fetch_remote
-$BUILD && ! $LIGHTWEIGHT && build
 
 $RSYNC "$SRC/common/" "$DEST"
 
-$LIGHTWEIGHT || $RSYNC "$SRC/main/" "$DEST"
+if ! $LIGHTWEIGHT; then
+    $RSYNC "$SRC/main/" "$DEST"
+    $BUILD && build "$DEST"
+fi
 
 exit 0
