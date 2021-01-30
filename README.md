@@ -61,7 +61,7 @@ Description=Lock the screen on resume from suspend
 Before=suspend.target
 
 [Service]
-User=fransic
+User={{__USER_NAME__}}
 Environment=XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
 ExecStart=/usr/bin/dm-tool lock
 

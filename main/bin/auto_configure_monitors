@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. /home/fransic/bin/lib/monitors.sh
+. $HOME/bin/lib/monitors.sh
 
 count_monitors() {
     xrandr | grep " connected" | wc -l
@@ -8,7 +8,7 @@ count_monitors() {
 
 configure() {
     monitor_configuration
-    /home/fransic/bin/panel/panel &
+    $HOME/bin/panel/panel &
 }
 
 if [ "$1" == "--init" ]; then
