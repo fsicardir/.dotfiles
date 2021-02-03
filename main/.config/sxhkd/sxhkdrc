@@ -79,19 +79,22 @@ super + e ; {s,p,b}
 # CLI common programs
 # ------------
 
-super + x; {r,p}
+super + x; {r,p,h}
     { \
     alacritty -e ranger, \
-    alacritty -e python3 \
+    alacritty -e python3, \
+    alacritty -e htop \
     }
 
 # GUI common programs
 # -------------------
 
-super + g; {f,i}
+super + g; {f,i,d,p}
     { \
     firefox, \
-    idea \
+    idea, \
+    dbeaver, \
+    postman \
     }
 
 # BSPWM
