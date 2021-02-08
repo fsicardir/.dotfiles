@@ -2,7 +2,7 @@
 
 usage() {
     printf "Usage:\n"
-    printf "\t%s [options]\n" $0
+    printf "\t%s [options]\n" "$0"
     printf "Options:\n"
     printf "\t-h\tdisplays this message\n"
     printf "\t-r\tfetch from remote repo\n"
@@ -18,7 +18,7 @@ fetch_remote() {
 
 build() {
     DEST="$1"
-    python3 $DEST/.vim/pack/plugins/start/YouCompleteMe/install.py \
+    python3 "$DEST/.vim/pack/plugins/start/YouCompleteMe/install.py" \
         --clangd-completer \
         --rust-completer \
         --java-completer \
@@ -30,7 +30,7 @@ RSYNC="rsync -a --copy-links"
 OPTERR=0
 REMOTE=false
 BUILD=false
-SRC="$(dirname "$BASH_SOURCE")"
+SRC="$(dirname "${BASH_SOURCE[0]}")"
 DEST="$HOME"
 LIGHTWEIGHT=false
 
@@ -56,13 +56,18 @@ while getopts "rbd:lh" o; do
     esac
 done
 
+CURRENT_DIR=$(pwd)
+cd "$SRC" || exit 1
+
 $REMOTE && fetch_remote
 
-$RSYNC "$SRC/common/" "$DEST"
+$RSYNC "./common/" "$DEST"
 
 if ! $LIGHTWEIGHT; then
-    $RSYNC "$SRC/main/" "$DEST"
+    $RSYNC "./main/" "$DEST"
     $BUILD && build "$DEST"
 fi
+
+cd "$CURRENT_DIR" || exit 1
 
 exit 0
