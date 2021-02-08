@@ -5,21 +5,23 @@ if [[ "$#" != 1 ]]; then
     exit 1
 fi
 
-DIR="~/Pictures/screenshots"
+DIR="$HOME/Pictures/screenshots"
 
+OPTIONS=""
 case "$1" in
     a|all)
-        scrot -m -e "mv \$f $DIR"
+        OPTIONS="-m"
         ;;
     s|sel|selection)
-        sleep 0.2; scrot -s -e  "mv \$f $DIR"
+        sleep 0.2
+        OPTIONS="-s"
         ;;
     f|focused)
-        scrot -ub -e "mv \$f $DIR"
+        OPTIONS="-ub"
         ;;
 esac
 
-if [ $? == 0 ]; then
+if scrot $OPTIONS -e "mv \$f $DIR"; then
     message=" New screenshot saved in
     $DIR"
     notify-send "Screenshot" "$message"

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 . ~/bin/panel/panel_colors.sh
 
@@ -11,23 +12,20 @@ cmd_repeat() {
 }
 
 network() {
-    p=""
     wifi=""
     ethernet=""
     if wifi | grep on &> /dev/null; then
         wifi=$(nmcli c show --active | grep wifi | cut -d' ' -f1)
-        if [ ! -z "$wifi" ]; then
+        if [ -n "$wifi" ]; then
             wifi=" $wifi  |"
         else
             wifi=" %{F$COLOR_RED} %{F$COLOR_SYS_FG}|"
         fi
-        p="y"
     fi
     
     ethernet=$(nmcli c show --active | grep ethernet)
-    if [ ! -z "$ethernet" ]; then
+    if [ -n "$ethernet" ]; then
         ethernet="  |"
-        p="y"
     fi
 
     printf "N%s%s\n" "$wifi" "$ethernet"
@@ -36,7 +34,7 @@ network() {
 bluetooth() {
     bt=""
     on=$(hcitool dev | grep -v Devices)
-    if [ ! -z "$on" ]; then
+    if [ -n "$on" ]; then
         connected=$(hcitool con | grep -v Connections)
         if [ -z "$connected" ]; then
             bt=" %{F$COLOR_RED}%{F$COLOR_SYS_FG} |"
@@ -49,9 +47,9 @@ bluetooth() {
 }
 
 battery() {
-    percentage=$(upower -i `upower -e | grep BAT` | grep percentage | tr -dc [:digit:])
+    percentage=$(upower -i "$(upower -e | grep BAT)" | grep percentage | tr -dc "[:digit:]")
     bat=""
-    stat=$(upower -i `upower -e | grep BAT` | grep state)
+    stat=$(upower -i "$(upower -e | grep BAT)" | grep state)
     if [[ $stat == *\ charging ]]; then
         bat="  |"
     else
@@ -72,6 +70,6 @@ battery() {
 }
 
 keyboard_layout() {
-    layout=$(setxkbmap -query | grep layout | cut -d: -f2 | tr -d [:space:])
+    layout=$(setxkbmap -query | grep layout | cut -d: -f2 | tr -d "[:space:]")
     printf "K %s  |\n" "$layout"
 }

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 primary_monitor() {
     xrandr | grep -E "eDP.* connected" | cut -d' ' -f1

@@ -7,9 +7,9 @@
 PANEL_WM_NAME="lemonbar"
 PANEL_PID_FILE="/tmp/panel.pid"
 PID=$(cat $PANEL_PID_FILE 2>/dev/null)
-if [[ ! -z "$PID" ]]; then
+if [[ -n "$PID" ]]; then
 	printf "%s\n" "The panel is already running. Killing it." >&2
-    kill $PID
+    kill "$PID"
 fi
 
 echo $$ >$PANEL_PID_FILE

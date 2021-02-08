@@ -13,7 +13,7 @@ notify_volume() {
     else
         icon="墳"
     fi
-    bar="$(~/bin/progress_bar ${vol} 24)"
+    bar=$(~/bin/progress_bar "$vol" 24)
     body=$(printf "%s %3s%% %s" $icon "$vol" "$bar")
     notify-send "Volume" "$body" -h string:x-canonical-private-synchronous:volume
 }

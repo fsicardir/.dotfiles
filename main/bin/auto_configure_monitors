@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-. $HOME/bin/lib/monitors.sh
+. "$HOME/bin/lib/monitors.sh"
 
 count_monitors() {
-    xrandr | grep " connected" | wc -l
+    xrandr | grep -c " connected"
 }
 
 configure() {
     monitor_configuration
-    $HOME/bin/panel/panel &
+    "$HOME/bin/panel/panel" &
 }
 
 if [ "$1" == "--init" ]; then

@@ -2,7 +2,7 @@
 
 #monitor_configuration
 bspc monitor -d 1 2 3 4 5 6 7 8 9 0
-$HOME/bin/auto_configure_monitors --init
+"$HOME/bin/auto_configure_monitors" --init
 
 # for overlapping borders
 BW=3
@@ -39,9 +39,9 @@ picom &
 
 wmname LG3D
 
-$HOME/bin/auto_configure_monitors &
+"$HOME/bin/auto_configure_monitors" &
 
-feh --bg-fill $HOME/Pictures/bg.png &
+feh --bg-fill "$HOME/Pictures/bg.png" &
 
 sxhkd &
 
