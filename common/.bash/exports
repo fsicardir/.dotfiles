@@ -12,12 +12,14 @@ export HISTCONTROL='ignoreboth';
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 
+export GIT_PS1_SHOWSTASHSTATE="true"
+
 export LESS="-FRX"
 
 export PASSWORD_STORE_GENERATED_LENGTH=24
 
 path_append() {
-    for path in $@; do
+    for path in "$@"; do
         [[ ":$PATH:" == *:$path:* ]] || export PATH="$PATH:$path"
     done
     unset path

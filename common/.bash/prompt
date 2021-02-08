@@ -8,7 +8,7 @@ fi
 
 prompt_len() {
     read -r PS_STRING <<<"$1"
-    PS_NO_COLORS=$(sed -E 's:\\\[\\033\[([0-9]*[;m])*\\\]::g' <<<$PS_STRING)
+    PS_NO_COLORS=$(sed -E 's:\\\[\\033\[([0-9]*[;m])*\\\]::g' <<<"$PS_STRING")
     EVAL_PS="${PS_NO_COLORS@P}"
     # there must be a couple characters that I'm not counting somewhere |:
     echo $((${#EVAL_PS} - 1))
@@ -16,14 +16,14 @@ prompt_len() {
 
 greater_than_screen() {
     len=$(prompt_len "$1")
-    [ $len -ge $COLUMNS ]
+    [ "$len" -ge "$COLUMNS" ]
     return $?
 }
 
 PS2=" ❯ "
 
 prompt_command() {
-    local ERROR_CODE=$?
+    local ERROR_CODE="$?"
 
     local ORANGE_CONTENT="\[\033[1;38;5;235;48;5;214m\]"
     local ORANGE_END="\[\033[38;5;214;48;5;0m\]"
@@ -33,7 +33,6 @@ prompt_command() {
     local RESET="\[\033[0m\]"
 
     if type __git_ps1 &>/dev/null; then
-        GIT_PS1_SHOWSTASHSTATE="true"
         GIT=$(__git_ps1 "[%s \uf126] " | sed -E 's/\$/≣/')
     fi
 
@@ -43,7 +42,7 @@ prompt_command() {
 
     print_right() {
         len=$(prompt_len "$ERROR")
-        printf "%*s" $(($COLUMNS + ${#ERROR} - $len)) "${ERROR}"
+        printf "%*s" $((COLUMNS + ${#ERROR} - len)) "$ERROR"
     }
 
     [ -n "${VIRTUAL_ENV}" ] && VENV="(${VIRTUAL_ENV##*/}) " || VENV=""
@@ -56,10 +55,10 @@ prompt_command() {
 
     if greater_than_screen "$E$PS1"; then
         # https://unix.stackexchange.com/questions/55930/bash-prompt-with-abbreviated-current-director-including-dot-files
-        WD=$(sed -E -e "s:$HOME:~:" -e 's:(\.?[^/])[^/]*/:\1/:g' <<<$PWD)
-        _PS1=$(sed -E "s: \\\\w : $WD :g" <<<$PS1)
+        WD=$(sed -E -e "s:$HOME:~:" -e 's:(\.?[^/])[^/]*/:\1/:g' <<<"$PWD")
+        _PS1=$(sed -E "s: \\\\w : $WD :g" <<<"$PS1")
         if greater_than_screen "$E$_PS1"; then
-            PS1=$(sed -E "s: \\\\w : \\\\W :g" <<<$PS1)
+            PS1=$(sed -E "s: \\\\w : \\\\W :g" <<<"$PS1")
         else
             PS1="$_PS1"
         fi

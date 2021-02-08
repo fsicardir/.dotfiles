@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 server() {
-    python3 -m http.server --cgi $1
+    python3 -m http.server --cgi "$1"
 }
 
 print_colors() {
