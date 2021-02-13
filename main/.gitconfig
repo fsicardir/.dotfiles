@@ -13,6 +13,10 @@
 
     co = checkout
 
+    df = diff
+
+    dt = difftool
+
     l = log --all --graph --decorate --oneline --abbrev-commit
 
     rclone = clone --recursive
@@ -26,3 +30,7 @@
     whoami = config user.email
 [pull]
 	rebase = false
+[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
