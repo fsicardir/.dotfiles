@@ -13,3 +13,7 @@ fi
 if __load_completion docker &>/dev/null; then
     complete -o bashdefault -o default -o nospace -F _docker d
 fi
+
+if [ -f /etc/bash_completion.d/docker-compose ]; then
+    complete -o bashdefault -o default -o nospace -F _docker_compose dcompose
+fi
