@@ -35,3 +35,6 @@ alias java8="export JAVA_HOME=/usr/lib/jvm/java-8-oracle"
 
 alias bt="bluetooth"
 alias btctl="bluetoothctl"
+
+# Casual ssh
+alias sshc="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
