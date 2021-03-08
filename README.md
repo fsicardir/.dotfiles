@@ -15,7 +15,6 @@ Usage:
 Options:
         -h      displays this message
         -r      fetch from remote repo
-        -b      full build (YouCompleteMe)
         -d      change destination (default is $HOME)
         -l      lightweight configuration (for command-line-only environments)
 ```
