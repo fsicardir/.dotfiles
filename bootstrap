@@ -6,7 +6,6 @@ usage() {
     printf "Options:\n"
     printf "\t-h\tdisplays this message\n"
     printf "\t-r\tfetch from remote repo\n"
-    printf "\t-b\tfull build (YouCompleteMe)\n"
     printf "\t-d\tchange destination (default is \$HOME)\n"
     printf "\t-l\tlightweight configuration (for command-line-only environments)\n"
 }
@@ -16,20 +15,10 @@ fetch_remote() {
     git submodule update --init --recursive
 }
 
-build() {
-    DEST="$1"
-    python3 "$DEST/.vim/pack/plugins/start/YouCompleteMe/install.py" \
-        --clangd-completer \
-        --rust-completer \
-        --java-completer \
-        --ts-completer
-}
-
 RSYNC="rsync -a --copy-links"
 
 OPTERR=0
 REMOTE=false
-BUILD=false
 SRC="$(dirname "${BASH_SOURCE[0]}")"
 DEST="$HOME"
 LIGHTWEIGHT=false
@@ -38,9 +27,6 @@ while getopts "rbd:lh" o; do
     case "$o" in
         r)
             REMOTE=true
-            ;;
-        b)
-            BUILD=true
             ;;
         d)
             DEST=$OPTARG
@@ -65,7 +51,6 @@ $RSYNC "./common/" "$DEST"
 
 if ! $LIGHTWEIGHT; then
     $RSYNC "./main/" "$DEST"
-    $BUILD && build "$DEST"
 fi
 
 cd "$CURRENT_DIR" || exit 1
