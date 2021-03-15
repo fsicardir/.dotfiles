@@ -5,6 +5,9 @@ window:
   decorations: full
   startup_mode: Maximized
   dynamic_title: true
+  padding:
+    x: 5
+    y: 5
 
 font:
   normal:
