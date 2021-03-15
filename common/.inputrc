@@ -4,6 +4,9 @@ set completion-ignore-case on
 set completion-map-case on
 set completion-query-items 50
 set editing-mode vi
+set show-mode-in-prompt on
+set vi-cmd-mode-string "\1\e[2 q\2"
+set vi-ins-mode-string "\1\e[6 q\2"
 set enable-bracketed-paste on
 set show-all-if-unmodified on
 set skip-completed-text on
@@ -17,3 +20,76 @@ set convert-meta off
 "\e[B": history-search-forward
 
 Control-l: clear-screen
+
+$if mode=vi
+set keymap vi-command
+"|": "A | "
+"daw": "lbdw"
+"yaw": "lbyw"
+"caw": "lbcw"
+"daW": "lBdW"
+"yaW": "lByW"
+"caW": "lBcW"
+"diw": "lbde"
+"yiw": "lbye"
+"ciw": "lbce"
+"diW": "lBdE"
+"yiW": "lByE"
+"ciW": "lBcE"
+"da\"": "lF\"df\""
+"di\"": "lF\"lmtf\"d`t"
+"ci\"": "di\"i"
+"ca\"": "da\"i"
+"da'": "lF'df'"
+"di'": "lF'lmtf'd`t"
+"ci'": "di'i"
+"ca'": "da'i"
+"da`": "lF\`df\`"
+"di`": "lF\`lmtf\`d`t"
+"ci`": "di`i"
+"ca`": "da`i"
+"da(": "lF(df)"
+"di(": "lF(lmtf)d`t"
+"ci(": "di(i"
+"ca(": "da(i"
+"da)": "lF(df)"
+"di)": "lF(lmtf)d`t"
+"ci)": "di(i"
+"ca)": "da(i"
+"da{": "lF{df}"
+"di{": "lF{lmtf}d`t"
+"ci{": "di{i"
+"ca{": "da{i"
+"da}": "lF{df}"
+"di}": "lF{lmtf}d`t"
+"ci}": "di}i"
+"ca}": "da}i"
+"da[": "lF[df]"
+"di[": "lF[lmtf]d`t"
+"ci[": "di[i"
+"ca[": "da[i"
+"da]": "lF[df]"
+"di]": "lF[lmtf]d`t"
+"ci]": "di]i"
+"ca]": "da]i"
+"da<": "lF<df>"
+"di<": "lF<lmtf>d`t"
+"ci<": "di<i"
+"ca<": "da<i"
+"da>": "lF<df>"
+"di>": "lF<lmtf>d`t"
+"ci>": "di>i"
+"ca>": "da>i"
+"da/": "lF/df/"
+"di/": "lF/lmtf/d`t"
+"ci/": "di/i"
+"ca/": "da/i"
+"da:": "lF:df:"
+"di:": "lF:lmtf:d`t"
+"ci:": "di:i"
+"ca:": "da:i"
+"gg": beginning-of-history
+"G": end-of-history
+?: reverse-search-history
+/: forward-search-history
+$endif
