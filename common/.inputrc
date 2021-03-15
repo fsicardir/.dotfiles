@@ -94,4 +94,4 @@ set keymap vi-command
 /: forward-search-history
 "k": history-search-backward
 "j": history-search-forward
-endif
+$endif
