@@ -9,6 +9,10 @@ window:
     x: 5
     y: 5
 
+scrolling:
+  history: 0
+  multiplier: 0
+
 font:
   normal:
     family: Hack
@@ -51,7 +55,6 @@ background_opacity: 1.0
 
 cursor:
   style: Block
-  vi_mode_style: Underline
   unfocused_hollow: true
 
 live_config_reload: true
