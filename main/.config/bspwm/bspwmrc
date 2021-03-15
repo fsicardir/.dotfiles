@@ -30,8 +30,8 @@ bspc config ignore_ewmh_focus true
 bspc config ignore_ewmh_fullscreen all
 
 bspc rule -a Alacritty:main desktop='1'
-bspc rule -a Firefox desktop='2'
 bspc rule -a Zathura state=tiled
+bspc rule -a feh state=floating center=true
 
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
 
