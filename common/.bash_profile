@@ -9,7 +9,7 @@ shopt -s dirspell
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-for file in ~/.bash/{prompt,exports,aliases,functions,completion,extras}; do
+for file in ~/.bash/{prompt,exports,aliases,functions,completion,extras}.sh; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file;
