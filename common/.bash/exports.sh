@@ -23,10 +23,10 @@ PATH="$HOME/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 
 export JAVA_HOME="/usr/lib/jvm/jdk-11.0.2"
-PATH="$PATH:$JAVA_HOME"
+PATH="$PATH:$JAVA_HOME/bin"
 
 export M2_HOME="/opt/apache-maven-3.5.2"
-PATH="$PATH:$M2_HOME"
+PATH="$PATH:$M2_HOME/bin"
 export MAVEN_OPTS="-Xms256m -Xmx512m"
 
 PATH="$PATH:$HOME/.cargo/bin"
