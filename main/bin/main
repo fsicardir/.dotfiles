@@ -1,3 +1,19 @@
 #!/usr/bin/env bash
-tmuxp load -d sys
-tmuxp load -y main
+
+SESSION="main"
+SHELL_W=""
+PYTHON_W=""
+
+tmux has-session -t ${SESSION} &> /dev/null
+
+if [ $? != 0 ]; then
+    tmux new-session -d -s "${SESSION}" -n "${SHELL_W}" -c ~
+
+    tmux new-window -n "${PYTHON_W}" -t "${SESSION}" python3
+
+    tmux select-window -t "${SESSION}:${SHELL_W}"
+
+    tmux select-pane -t "${SESSION}:${SHELL_W}.1"
+fi
+
+tmux attach -t ${SESSION}
