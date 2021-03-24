@@ -11,7 +11,7 @@ usage() {
 }
 
 fetch_remote() {
-    git pull origin master
+    git pull origin HEAD
     git submodule update --init --recursive
 }
 
