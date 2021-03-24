@@ -89,7 +89,7 @@ super + x; {r,p,h}
 # GUI common programs
 # -------------------
 
-super + g; {f,i,d,p}
+super + g; {b,i,d,p}
     { \
     firefox, \
     idea, \
