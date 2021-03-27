@@ -72,14 +72,6 @@ prompt_command() {
 
     PS1="$PS1\n$PS2"
 
-    # If this is an xterm set the title to user@host:dir
-    case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-        ;;
-    *)
-        ;;
-    esac
 }
 
 PROMPT_COMMAND=prompt_command
