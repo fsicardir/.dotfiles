@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 server() {
-    python3 -m http.server --cgi "$1"
+    python3 -m http.server --cgi "$@"
 }
 
 print_colors() {
@@ -14,5 +14,6 @@ print_colors() {
 }
 
 z() {
-    zathura "$1" &>/dev/null &
+    zathura "$@" &>/dev/null &
 }
+
