@@ -27,7 +27,7 @@ LIGHTWEIGHT=false
 MACOS=false
 BWPWM=false
 
-while getopts "rbd:lh" o; do
+while getopts "rd:lmbh" o; do
     case "$o" in
         r)
             REMOTE=true
@@ -59,11 +59,12 @@ $REMOTE && fetch_remote
 
 $RSYNC "./lightweight/" "$DEST"
 
-if ! $LIGHTWEIGHT; then
-    $RSYNC "./common/" "$DEST"
+if $LIGHTWEIGHT; then
     cd "$CURRENT_DIR" || exit 1
     exit 0
 fi
+
+$RSYNC "./common/" "$DEST"
 
 if $MACOS; then
     $RSYNC "./common-gui/" "$DEST"
