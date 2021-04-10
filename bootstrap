@@ -8,6 +8,8 @@ usage() {
     printf "\t-r\tfetch from remote repo\n"
     printf "\t-d\tchange destination (default is \$HOME)\n"
     printf "\t-l\tlightweight configuration (for command-line-only environments)\n"
+    printf "\t-b\tadd configuration for bspwm\n"
+    printf "\t-m\tadd configuration for macos\n"
 }
 
 fetch_remote() {
@@ -22,6 +24,8 @@ REMOTE=false
 SRC="$(dirname "${BASH_SOURCE[0]}")"
 DEST="$HOME"
 LIGHTWEIGHT=false
+MACOS=false
+BWPWM=false
 
 while getopts "rbd:lh" o; do
     case "$o" in
@@ -33,6 +37,12 @@ while getopts "rbd:lh" o; do
             ;;
         l)
             LIGHTWEIGHT=true
+            ;;
+        m)
+            MACOS=true
+            ;;
+        b)
+            BSPWM=true
             ;;
         h|*)
             usage
@@ -47,10 +57,20 @@ cd "$SRC" || exit 1
 
 $REMOTE && fetch_remote
 
-$RSYNC "./common/" "$DEST"
+$RSYNC "./lightweight/" "$DEST"
 
 if ! $LIGHTWEIGHT; then
-    $RSYNC "./main/" "$DEST"
+    $RSYNC "./common/" "$DEST"
+    cd "$CURRENT_DIR" || exit 1
+    exit 0
+fi
+
+if $MACOS; then
+    $RSYNC "./common-gui/" "$DEST"
+    $RSYNC "./macos/" "$DEST"
+elif $BSPWM; then
+    $RSYNC "./common-gui/" "$DEST"
+    $RSYNC "./bspwm/" "$DEST"
 fi
 
 cd "$CURRENT_DIR" || exit 1
