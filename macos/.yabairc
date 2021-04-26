@@ -26,5 +26,6 @@ yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="^Font Book$" manage=off
+yabai -m rule --add app="^Spotify$" manage=off
 
 echo "yabai configuration loaded.."
