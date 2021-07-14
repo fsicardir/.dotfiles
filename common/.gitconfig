@@ -24,8 +24,8 @@
     amend = commit --amend --reuse-message=HEAD
 
     # Remove branches that have already been merged with master
-	# a.k.a. ‘delete merged’
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    # a.k.a. ‘delete merged’
+    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
     whoami = config user.email
 [pull]
@@ -34,3 +34,6 @@
     tool = vimdiff
 [merge]
     tool = vimdiff
+[init]
+    defaultBranch = master
+    templatedir = '~/.git-templates'
