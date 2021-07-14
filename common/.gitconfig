@@ -1,5 +1,7 @@
 [include]
     path = ~/.gitconfig.user
+[core]
+    hooksPath = ~/.git-hooks
 [alias]
     s = status -s
 
@@ -36,4 +38,3 @@
     tool = vimdiff
 [init]
     defaultBranch = master
-    templatedir = ~/.git-templates
