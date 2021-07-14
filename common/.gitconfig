@@ -36,4 +36,4 @@
     tool = vimdiff
 [init]
     defaultBranch = master
-    templatedir = '~/.git-templates'
+    templatedir = ~/.git-templates

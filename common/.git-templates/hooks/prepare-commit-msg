@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# reference: https://stackoverflow.com/questions/48170832/pre-commit-hook-to-check-for-jira-issue-key
+
 COMMIT_MSG_FILE=$1
 COMMIT_SOURCE=$2
 SHA1=$3
@@ -9,7 +11,7 @@ REGEX_JIRA_ID="[a-zA-Z0-9,\.\_\-]+-[0-9]+"
 BRANCH_NAME=$(git symbolic-ref --short HEAD)
 
 if [[ -z "$BRANCH_NAME" ]]; then
-        echo "No branch name... "; exit 1
+        >&2 echo "No branch name... "; exit 1
 fi
 
 JIRA_ID=$(echo "$BRANCH_NAME" | grep -o -E "$REGEX_JIRA_ID")
