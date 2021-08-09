@@ -6,10 +6,16 @@ COMMIT_MSG_FILE=$1
 COMMIT_SOURCE=$2
 SHA1=$3
 
+IS_AMEND=$(ps -ocommand= -p $PPID | grep -e '--amend');
+
+if [ -n "$IS_AMEND" ]; then
+  exit 0
+fi
+
 BRANCH_NAME=$(git symbolic-ref --short HEAD)
 
 if [[ -z "$BRANCH_NAME" ]]; then
-        >&2 echo "No branch name... "; exit 1
+    >&2 echo "No branch name... "; exit 1
 fi
 
 REGEX_JIRA_ID="[a-zA-Z0-9,\.\_\-]+-[0-9]+"
