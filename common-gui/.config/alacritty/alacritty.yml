@@ -8,6 +8,7 @@ window:
   padding:
     x: 5
     y: 5
+  opacity: 1.0
 
 scrolling:
   history: 0
@@ -48,8 +49,6 @@ colors:
 
 bell:
   duration: 0
-
-background_opacity: 1.0
 
 cursor:
   style: Block
