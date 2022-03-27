@@ -24,6 +24,10 @@ greater_than_screen() {
 
 PS2=" ❯ "
 
+if ! type __git_ps1 &>/dev/null && [ -f /usr/share/git/git-prompt.sh ]; then
+    . /usr/share/git/git-prompt.sh
+fi
+
 prompt_command() {
     local ERROR_CODE="$?"
 
