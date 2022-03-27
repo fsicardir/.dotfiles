@@ -5,5 +5,5 @@ configuration {
         combi-modi: "drun,window,ssh";
         scroll-method: 1;
         sidebar-mode: true;
-        theme: "gruvbox-dark";
 }
+@theme "gruvbox-dark"

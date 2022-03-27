@@ -8,7 +8,7 @@ configuration {
 @theme "gruvbox-dark"
 
 window {
-    width: 10%;
+    width: 15%;
 }
 
 listview {
