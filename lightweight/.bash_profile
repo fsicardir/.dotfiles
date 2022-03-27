@@ -14,3 +14,6 @@ for file in ~/.bash/{prompt,exports,aliases,functions,completion,extras}.sh; do
 done
 unset file;
 
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    exec startx
+fi
