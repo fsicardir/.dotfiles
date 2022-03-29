@@ -41,6 +41,8 @@ wmname LG3D
 
 "$HOME/bin/auto_configure_monitors" &
 
+"$HOME/bin/run-xsecurelock" &
+
 feh --bg-fill "$HOME/Pictures/bg.png" &
 
 sxhkd &
