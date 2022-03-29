@@ -8,6 +8,7 @@ if [ "$1" = lock ]; then
     XSECURELOCK_SAVER=saver_blank \
     XSECURELOCK_SAVER_RESET_ON_AUTH_CLOSE=1 \
     XSECURELOCK_SHOW_DATETIME=1 \
+    XSECURELOCK_COMPOSITE_OBSCURER=0 \
         exec xsecurelock
 fi
 
