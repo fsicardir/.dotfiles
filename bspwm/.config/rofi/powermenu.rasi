@@ -2,7 +2,6 @@
 
 configuration {
         modi: "powermenu:~/bin/power_menu";
-        lines: 6;
 }
 
 @theme "gruvbox-dark"
@@ -15,6 +14,7 @@ listview {
     scrollbar: false;
     border: 0;
     padding: 0;
+    lines: 5;
 }
 
 inputbar {
