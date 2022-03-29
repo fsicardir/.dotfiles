@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# used by intellij idea's Native Terminal Plugin
-# $HOME/bin/idea_custom_terminal_command ${project.dir}
-
-DIR="$1"
-tmux send-keys "cd ${DIR}" ENTER
