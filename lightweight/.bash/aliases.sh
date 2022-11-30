@@ -39,3 +39,5 @@ alias btctl="bluetoothctl"
 
 # Casual ssh
 alias sshc="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
+alias curl='curl -w"\n" '
