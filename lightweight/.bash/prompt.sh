@@ -74,7 +74,11 @@ prompt_command() {
         ! greater_than_screen "$E$PS1" && PS1="$E$PS1" 
     fi
 
-    PS1="$PS1\n$PS2"
+    if greater_than_screen "$PS1"; then
+        PS1="$PS2"
+    else
+        PS1="$PS1\n$PS2"
+    fi
 
 }
 
