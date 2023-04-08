@@ -9,6 +9,7 @@ window:
     x: 5
     y: 5
   opacity: 1.0
+  option_as_alt: Both
 
 scrolling:
   history: 0
@@ -56,8 +57,5 @@ cursor:
 
 live_config_reload: true
 
-alt_send_esc: true
-
 mouse:
   hide_when_typing: true
-
