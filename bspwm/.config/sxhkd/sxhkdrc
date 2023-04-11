@@ -19,7 +19,7 @@ super + Escape
 
 # lock screen
 ctrl + alt + l
-     dm-tool lock
+     xset s activate
 
 # toggle keyboard layout
 super + alt + space
