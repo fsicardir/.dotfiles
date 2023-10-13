@@ -9,11 +9,11 @@ notify_volume() {
     mute=$(pactl list sinks | sed -n -E "s/[[:space:]]*Mute: (.*)/\1/p" | tail -n 1)
     icon=""
     if [[ ("$vol" == "0") || ("$mute" == "yes") ]]; then
-        icon="婢"
+        icon=""
     else
-        icon="墳"
+        icon=""
     fi
-    bar=$(~/bin/progress_bar "$vol" 24)
+    bar=$(~/bin/progress_bar "$vol" 20)
     body=$(printf "%s %3s%% %s" $icon "$vol" "$bar")
     notify-send "Volume" "$body" -h string:x-canonical-private-synchronous:volume
 }
