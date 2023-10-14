@@ -31,10 +31,6 @@ while read -r line ; do
             esac
 			sys="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${BLUETOOTH}${NETWORK}${KEYBOARD_LAYOUT}${BATTERY} ${CLOCK} %{B-}%{F-}"
 			;;
-		T*)
-			# xtitle output
-			title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
-			;;
 		W*)
 			# bspwm's state
 			wm=
@@ -125,16 +121,10 @@ while read -r line ; do
 						esac
 						wm="${wm}%{F${FG}}%{B${BG}}%{U${UL}}%{+u}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}%{-u}"
 						;;
-                    [LGT]*)
-                        # node flags
-                        [ -z "$name" ] && name="*"
-                        wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG}[${name}]%{B-}%{F-}"
-                        ;;
-
 				esac
 				shift
 			done
 			;;
 	esac
-	printf "%s\n" "%{l}${wm}%{c}${title}%{r}${sys}"
+	printf "%s\n" "%{l}${wm}%{r}${sys}"
 done
