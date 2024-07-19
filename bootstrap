@@ -69,6 +69,8 @@ $RSYNC "./common/" "$DEST"
 if $MACOS; then
     $RSYNC "./common-gui/" "$DEST"
     $RSYNC "./macos/" "$DEST"
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.bash/git-completion.bash
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.bash/git-prompt.sh
 elif $BSPWM; then
     $RSYNC "./common-gui/" "$DEST"
     $RSYNC "./bspwm/" "$DEST"
